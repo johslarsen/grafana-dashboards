@@ -21,7 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1629228380971,
+  "iteration": 1630139600926,
   "links": [],
   "panels": [
     {
@@ -715,6 +715,217 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
+            "fillOpacity": 5,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Fill% Average"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(Avg|Max)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              },
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(Total|Max|Active).*"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "none"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 8,
+        "y": 8
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "count(smartmon_device_smart_available{instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "Total"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(smartmon_device_active{instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "Active"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(smartmon_device_errors{instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Errors",
+          "refId": "Errors"
+        },
+        {
+          "exemplar": true,
+          "expr": "count(smartmon_device_smart_healthy{instance=~\"$node\"}==0)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Unhealthy",
+          "refId": "Unhealthy"
+        },
+        {
+          "exemplar": true,
+          "expr": "avg(avg(smartmon_attr_value{name=\"temperature_celsius\",instance=~\"$node\"} < 100) by (instance))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Avg",
+          "refId": "Avg C"
+        },
+        {
+          "exemplar": true,
+          "expr": "max(smartmon_attr_value{name=\"temperature_celsius\",instance=~\"$node\"} < 100)",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Max",
+          "refId": "Max C"
+        }
+      ],
+      "title": "Disk Status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -809,8 +1020,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 8,
-        "x": 8,
+        "w": 4,
+        "x": 12,
         "y": 8
       },
       "id": 6,
@@ -1552,7 +1763,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Prometheus",
           "value": "Prometheus"
         },
@@ -1710,5 +1921,5 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 30
+  "version": 31
 }
