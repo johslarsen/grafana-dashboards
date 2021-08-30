@@ -21,7 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1630139600926,
+  "iteration": 1630238718853,
   "links": [],
   "panels": [
     {
@@ -895,7 +895,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(avg(smartmon_attr_value{name=\"temperature_celsius\",instance=~\"$node\"} < 100) by (instance))",
+          "expr": "avg(avg(smartmon_attr_raw_value{name=\"temperature_celsius\",instance=~\"$node\"}) by (instance))",
           "hide": false,
           "interval": "",
           "legendFormat": "Avg",
@@ -903,7 +903,7 @@
         },
         {
           "exemplar": true,
-          "expr": "max(smartmon_attr_value{name=\"temperature_celsius\",instance=~\"$node\"} < 100)",
+          "expr": "max(smartmon_attr_raw_value{name=\"temperature_celsius\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Max",
@@ -1921,5 +1921,5 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 31
+  "version": 32
 }
