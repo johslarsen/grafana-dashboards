@@ -1,0 +1,1303 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
+  "id": 24,
+  "iteration": 1630277660455,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 9,
+      "panels": [],
+      "title": "Current details",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "color-background-solid",
+            "width": 80
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*cel.*"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*hours"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "h"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "spin_up_time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|error log entries|offline_uncorrectable|program_fail_count|current_pending_sector|reported_uncorrect|reallocated_sector_ct|reallocated_event_count|spin_retry_count|udma_crc_error_count|command_timeout)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "device"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(host|model_family|device_model|serial_number|product|revision|vendor)"
+            },
+            "properties": [
+              {
+                "id": "custom.width"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|active)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bool_yes_no"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "host"
+          }
+        ]
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "label_replace(1-smartmon_device_smart_healthy{job=~\"$job\",instance=~\"$host\",device=~\"$device\"} == 1, \"name\", \"fails self-test\", \"NO LABEL\", \".*\")",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Healthy"
+        }
+      ],
+      "title": "Disk failing self-test",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "valueLabel": "name"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "disk": true,
+              "job": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 5,
+              "active": 8,
+              "airflow_temperature_cel": 24,
+              "command_timeout": 20,
+              "current_pending_sector": 11,
+              "device": 2,
+              "device_model": 32,
+              "disk": 3,
+              "error log entries": 7,
+              "fails self-test": 6,
+              "firmware_version": 33,
+              "hardware_ecc_recovered": 13,
+              "instance": 1,
+              "job": 4,
+              "load_cycle_count": 22,
+              "model_family": 31,
+              "offline_uncorrectable": 12,
+              "power_cycle_count": 27,
+              "power_on_hours": 25,
+              "product": 35,
+              "program_fail_count": 21,
+              "raw_read_error_rate": 17,
+              "reallocated_event_count": 9,
+              "reallocated_sector_ct": 10,
+              "reported_uncorrect": 15,
+              "revision": 36,
+              "seek_error_rate": 16,
+              "serial_number": 34,
+              "spin_retry_count": 18,
+              "spin_up_time": 19,
+              "start_stop_count": 28,
+              "temperature_celsius": 23,
+              "total_lbas_read": 29,
+              "total_lbas_written": 30,
+              "udma_crc_error_count": 14,
+              "unsafe_shutdown_count": 26,
+              "vendor": 37
+            },
+            "renameByName": {
+              "instance": "host"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "device"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "host"
+              }
+            ]
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "color-text",
+            "width": 80
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*cel.*"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*hours"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "h"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "spin_up_time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|error log entries|offline_uncorrectable|program_fail_count|current_pending_sector|reported_uncorrect|reallocated_sector_ct|reallocated_event_count|spin_retry_count|udma_crc_error_count|command_timeout)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "device"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(host|model_family|device_model|serial_number|product|revision|vendor)"
+            },
+            "properties": [
+              {
+                "id": "custom.width"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|active)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bool_yes_no"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "host"
+          }
+        ]
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "label_replace(smartmon_device_errors{job=~\"$job\",instance=~\"$host\",device=~\"$device\"} > 0, \"name\", \"error log entries\", \"NO LABEL\", \".*\")",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Errors"
+        },
+        {
+          "exemplar": true,
+          "expr": "smartmon_attr_raw_value{name=~\"(fails self-test|error log entries|offline_uncorrectable|program_fail_count|current_pending_sector|reported_uncorrect|reallocated_sector_ct|reallocated_event_count|spin_retry_count|udma_crc_error_count|command_timeout)\",job=~\"$job\",instance=~\"$host\",device=~\"$device\"} > 0",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "critical raw"
+        }
+      ],
+      "title": "Vulnerable disks",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "valueLabel": "name"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "disk": true,
+              "job": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 5,
+              "active": 8,
+              "airflow_temperature_cel": 24,
+              "command_timeout": 20,
+              "current_pending_sector": 11,
+              "device": 2,
+              "device_model": 32,
+              "disk": 3,
+              "error log entries": 7,
+              "fails self-test": 6,
+              "firmware_version": 33,
+              "hardware_ecc_recovered": 13,
+              "instance": 1,
+              "job": 4,
+              "load_cycle_count": 22,
+              "model_family": 31,
+              "offline_uncorrectable": 12,
+              "power_cycle_count": 27,
+              "power_on_hours": 25,
+              "product": 35,
+              "program_fail_count": 21,
+              "raw_read_error_rate": 17,
+              "reallocated_event_count": 9,
+              "reallocated_sector_ct": 10,
+              "reported_uncorrect": 15,
+              "revision": 36,
+              "seek_error_rate": 16,
+              "serial_number": 34,
+              "spin_retry_count": 18,
+              "spin_up_time": 19,
+              "start_stop_count": 28,
+              "temperature_celsius": 23,
+              "total_lbas_read": 29,
+              "total_lbas_written": 30,
+              "udma_crc_error_count": 14,
+              "unsafe_shutdown_count": 26,
+              "vendor": 37
+            },
+            "renameByName": {
+              "instance": "host"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "device"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "host"
+              }
+            ]
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "description": "Green/red fields indicates pass-fails. They are self-test, empty error log and \"Critical attributes\" from https://en.wikipedia.org/wiki/S.M.A.R.T.#Known_ATA_S.M.A.R.T._attributes",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "color-text",
+            "width": 80
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*cel.*"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "celsius"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*hours"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "h"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 43800
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "spin_up_time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 1000
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|error log entries|offline_uncorrectable|program_fail_count|current_pending_sector|reported_uncorrect|reallocated_sector_ct|reallocated_event_count|spin_retry_count|udma_crc_error_count|command_timeout)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "device"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 95
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(host|model_family|device_model|serial_number|product|revision|vendor)"
+            },
+            "properties": [
+              {
+                "id": "custom.width"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(fails self-test|active)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "bool_yes_no"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "(power_cycle_count|start_stop_count)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 50
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "unsafe_shutdown_count"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": null
+                    },
+                    {
+                      "color": "dark-yellow",
+                      "value": 5
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "unsafe_shutdown_count"
+          }
+        ]
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "smartmon_device_info{job=~\"$job\",instance=~\"$host\",device=~\"$device\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Info"
+        },
+        {
+          "exemplar": true,
+          "expr": "smartmon_attr_raw_value{job=~\"$job\",instance=~\"$host\",device=~\"$device\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Raw"
+        },
+        {
+          "exemplar": true,
+          "expr": "label_replace(smartmon_device_errors{job=~\"$job\",instance=~\"$host\",device=~\"$device\"}, \"name\", \"error log entries\", \"NO LABEL\", \".*\")",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Errors"
+        },
+        {
+          "exemplar": true,
+          "expr": "label_replace(1-smartmon_device_smart_healthy{job=~\"$job\",instance=~\"$host\",device=~\"$device\"}, \"name\", \"fails self-test\", \"NO LABEL\", \".*\")",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Healthy"
+        },
+        {
+          "exemplar": true,
+          "expr": "label_replace(smartmon_device_active{job=~\"$job\",instance=~\"$host\",device=~\"$device\"}, \"name\", \"active\", \"NO LABEL\", \".*\")",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "Active"
+        }
+      ],
+      "title": "Raw S.M.A.R.T values",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "valueLabel": "name"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "disk": true,
+              "job": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 5,
+              "active": 8,
+              "airflow_temperature_cel": 24,
+              "command_timeout": 20,
+              "current_pending_sector": 11,
+              "device": 2,
+              "device_model": 32,
+              "disk": 3,
+              "error log entries": 7,
+              "fails self-test": 6,
+              "firmware_version": 33,
+              "hardware_ecc_recovered": 13,
+              "instance": 1,
+              "job": 4,
+              "load_cycle_count": 22,
+              "model_family": 31,
+              "offline_uncorrectable": 12,
+              "power_cycle_count": 27,
+              "power_on_hours": 25,
+              "product": 35,
+              "program_fail_count": 21,
+              "raw_read_error_rate": 17,
+              "reallocated_event_count": 9,
+              "reallocated_sector_ct": 10,
+              "reported_uncorrect": 15,
+              "revision": 36,
+              "seek_error_rate": 16,
+              "serial_number": 34,
+              "spin_retry_count": 18,
+              "spin_up_time": 19,
+              "start_stop_count": 28,
+              "temperature_celsius": 23,
+              "total_lbas_read": 29,
+              "total_lbas_written": 30,
+              "udma_crc_error_count": 14,
+              "unsafe_shutdown_count": 26,
+              "vendor": 37
+            },
+            "renameByName": {
+              "instance": "host"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "device"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "host"
+              }
+            ]
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Wear and tear",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 13,
+      "interval": "30m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "hidden",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "smartmon_attr_raw_value{name=\"temperature_celsius\",job=~\"$job\",instance=~\"$host\",device=~\"$device\"}",
+          "interval": "",
+          "legendFormat": "{{instance}} {{device}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "title": "Temperature",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#37872d12",
+                "value": null
+              },
+              {
+                "color": "#f2495c0d",
+                "value": 43800
+              }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 12,
+        "y": 17
+      },
+      "id": 14,
+      "interval": "30m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": false,
+          "expr": "smartmon_attr_raw_value{name=\"power_on_hours\",job=~\"$job\",instance=~\"$host\",device=~\"$device\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance}} {{device}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "title": "Age",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#37872d12",
+                "value": null
+              },
+              {
+                "color": "#f2495c0d",
+                "value": 43800
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 18,
+        "y": 17
+      },
+      "id": 15,
+      "interval": "30m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": false,
+          "expr": "smartmon_attr_raw_value{name=\"power_cycle_count\",job=~\"$job\",instance=~\"$host\",device=~\"$device\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance}} {{device}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "title": "Power cycles",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Job",
+        "multi": true,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(node_uname_info, job)",
+          "refId": "Prometheus-job-Variable-Query"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, instance)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Host:",
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": {
+          "query": "label_values(node_uname_info{job=~\"$job\"}, instance)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "label_values(smartmon_device_smart_available{job=~\"$job\",instance=~\"$host\"}, device)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Device",
+        "multi": true,
+        "name": "device",
+        "options": [],
+        "query": {
+          "query": "label_values(smartmon_device_smart_available{job=~\"$job\",instance=~\"$host\"}, device)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "S.M.A.R.T. Details",
+  "uid": "2SoOtc4nz",
+  "version": 8
+}
