@@ -21,7 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1630238718853,
+  "iteration": 1631567444866,
   "links": [],
   "panels": [
     {
@@ -648,7 +648,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.1.1",
+      "pluginVersion": "8.1.2",
       "targets": [
         {
           "exemplar": true,
@@ -1038,7 +1038,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"})",
+          "expr": "sum(max(node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance,device))",
           "hide": false,
           "interval": "",
           "legendFormat": "Total Available",
@@ -1046,7 +1046,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}-node_filesystem_avail_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"})",
+          "expr": "sum(max(node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance,device)-max(node_filesystem_avail_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance,device))",
           "hide": false,
           "interval": "",
           "legendFormat": "Total Used",
@@ -1054,7 +1054,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(avg(1-node_filesystem_avail_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}/node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance))",
+          "expr": "avg(avg(1-max(node_filesystem_avail_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance,device)/max(node_filesystem_size_bytes{fstype=~\"$fstype\",job=~\"$job\",instance=~\"$node\"}) by (instance,device)) by (instance))",
           "hide": false,
           "interval": "",
           "legendFormat": "Fill% Average",
@@ -1543,7 +1543,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.1.1",
+      "pluginVersion": "8.1.2",
       "targets": [
         {
           "exemplar": true,
@@ -1921,5 +1921,5 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 32
+  "version": 34
 }
