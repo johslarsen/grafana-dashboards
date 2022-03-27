@@ -59,7 +59,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1648411122388,
+  "iteration": 1648419591326,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -191,12 +191,16 @@
                 "value": "always"
               },
               {
-                "id": "custom.pointSize",
-                "value": 3
+                "id": "custom.drawStyle",
+                "value": "bars"
               },
               {
-                "id": "custom.drawStyle",
-                "value": "points"
+                "id": "custom.fillOpacity",
+                "value": 100
+              },
+              {
+                "id": "custom.showPoints",
+                "value": "never"
               }
             ]
           }
@@ -2016,6 +2020,6 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
