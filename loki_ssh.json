@@ -59,7 +59,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1648412161974,
+  "iteration": 1648857199219,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -111,7 +111,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 113
+                "value": 125
               },
               {
                 "id": "links",
@@ -424,7 +424,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 113
+                "value": 125
               },
               {
                 "id": "links",
@@ -1585,6 +1585,6 @@
   "timezone": "",
   "title": "Loki SSH",
   "uid": "fe0uThai6",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 }
