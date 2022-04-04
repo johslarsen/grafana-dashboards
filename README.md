@@ -1,6 +1,6 @@
 ## Loki
 
-Most of the loki queries are based on systemd logs using labels for the systemd unit and the syslog identifiers. These are scraped with a Loki job like:
+Most of the loki queries are based on systemd logs using labels for the systemd unit and the syslog identifiers. Also add the systemd priority as a level label, which is useful to get coloring in explore log volume and log views. These are scraped with a Loki job like:
 ```
 - job_name: systemd-journal
   journal:
@@ -14,6 +14,8 @@ Most of the loki queries are based on systemd logs using labels for the systemd 
       target_label: 'unit'
     - source_labels: ['__journal_syslog_identifier']
       target_label: 'syslog'
+    - source_labels: ['__journal_priority_keyword']
+      target_label: 'level'
 ```
 
 ### Nginx
