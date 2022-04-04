@@ -59,7 +59,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1648857199219,
+  "iteration": 1649030162782,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -348,6 +348,7 @@
         "y": 0
       },
       "id": 9,
+      "interval": "$aggregation",
       "options": {
         "legend": {
           "calcs": [],
