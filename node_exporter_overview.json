@@ -15,7 +15,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.4.1"
+      "version": "8.4.6"
     },
     {
       "type": "datasource",
@@ -59,7 +59,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1648419591326,
+  "iteration": 1650154502116,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -708,7 +708,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -907,7 +907,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
+        "w": 2,
         "x": 8,
         "y": 8
       },
@@ -1085,8 +1085,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 12,
+        "w": 2,
+        "x": 10,
         "y": 8
       },
       "id": 6,
@@ -1128,6 +1128,110 @@
         }
       ],
       "title": "Overall Storage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1000000000
+              },
+              {
+                "color": "green",
+                "value": 10000000000
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 8
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "sortBy": "Last *",
+          "sortDesc": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "node_filesystem_avail_bytes{job=~\"$job\",instance=~\"$node\",mountpoint=~\"$system_mounts\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} {{mountpoint}}",
+          "refId": "Available"
+        }
+      ],
+      "title": "Free system storage",
       "type": "timeseries"
     },
     {
@@ -1621,7 +1725,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.4.1",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "datasource": {
@@ -2009,6 +2113,27 @@
         "query": "[sh]d.|nvme.n.|mmcblk.",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "/($|var)",
+          "value": "/($|var)"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "system_mounts",
+        "options": [
+          {
+            "selected": true,
+            "text": "/($|var)",
+            "value": "/($|var)"
+          }
+        ],
+        "query": "/($|var)",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -2020,6 +2145,6 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 2,
+  "version": 8,
   "weekStart": ""
 }
