@@ -407,19 +407,19 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"})",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "Used",
-          "refId": "Used"
-        },
-        {
-          "exemplar": true,
           "expr": "sum(node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Buffer",
           "refId": "Buffer"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Used",
+          "refId": "Used"
         },
         {
           "exemplar": true,
@@ -457,8 +457,8 @@
           "expr": "avg(node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}/node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Used% Average",
-          "refId": "Used%"
+          "legendFormat": "Free% Average",
+          "refId": "Free%"
         }
       ],
       "title": "Overall Memory",
