@@ -150,6 +150,51 @@
                 "value": 5
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Load (1m)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#6eff5b",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Load (5m)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#0aefff",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cores"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -209,7 +254,7 @@
           "expr": "sum(node_load1{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Load  Average (1m)",
+          "legendFormat": "Load (1m)",
           "range": true,
           "refId": "1m"
         },
@@ -222,7 +267,7 @@
           "expr": "sum(node_load5{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Load  Average (5m)",
+          "legendFormat": "Load (5m)",
           "range": true,
           "refId": "5m"
         }
@@ -236,7 +281,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
+      "description": "U: Used, B: Buffers, Shm: Shared, FS: Cached, Fre: Free, Swp: Swap\n",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -309,6 +354,13 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
               }
             ]
           },
@@ -352,6 +404,111 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "U"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Shm"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "FS"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Swp"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Free% Average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Fre"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#696969",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -381,10 +538,35 @@
           },
           "editorMode": "code",
           "exemplar": true,
+          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "interval": "",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "Total"
+        },
+        {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"}\n-node_memory_Shmem_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "U",
+          "range": true,
+          "refId": "Used"
+        },
+        {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
           "expr": "sum(node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Buf",
+          "legendFormat": "B",
           "range": true,
           "refId": "Buffer"
         },
@@ -394,44 +576,38 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "expr": "sum(node_memory_Shmem_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Use",
+          "legendFormat": "Shm",
           "range": true,
-          "refId": "Used"
+          "refId": "Shared"
         },
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Cache",
+          "legendFormat": "FS",
+          "range": true,
           "refId": "Cache"
         },
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Free",
+          "legendFormat": "Fre",
+          "range": true,
           "refId": "Free"
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"})",
-          "interval": "",
-          "legendFormat": "Total",
-          "refId": "Total"
         },
         {
           "datasource": {
@@ -442,7 +618,7 @@
           "expr": "sum(node_memory_SwapTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_SwapFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_SwapCached_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "Swap",
+          "legendFormat": "Swp",
           "range": true,
           "refId": "Swap"
         },
@@ -2597,6 +2773,6 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 18,
+  "version": 19,
   "weekStart": ""
 }
