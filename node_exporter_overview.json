@@ -632,6 +632,19 @@
           "interval": "",
           "legendFormat": "Free% Average",
           "refId": "Free%"
+        },
+        {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "avg(node_memory_MemAvailable_bytes{job=~\"$job\",instance=~\"$node\"}/node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Available% Average",
+          "range": true,
+          "refId": "Available%"
         }
       ],
       "title": "Overall Memory",
