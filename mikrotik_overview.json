@@ -774,7 +774,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text"
+                    "color": "text",
+                    "value": null
                   }
                 ]
               },
@@ -845,7 +846,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green"
+                          "color": "green",
+                          "value": null
                         },
                         {
                           "color": "yellow",
@@ -904,7 +906,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green"
+                          "color": "green",
+                          "value": null
                         },
                         {
                           "color": "yellow",
@@ -939,7 +942,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green"
+                          "color": "green",
+                          "value": null
                         },
                         {
                           "color": "yellow",
@@ -970,7 +974,8 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green"
+                          "color": "green",
+                          "value": null
                         },
                         {
                           "color": "yellow",
@@ -1519,7 +1524,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text"
+                    "color": "text",
+                    "value": null
                   }
                 ]
               },
@@ -1556,9 +1562,9 @@
             "h": 4,
             "w": 24,
             "x": 0,
-            "y": 35
+            "y": 27
           },
-          "id": 14,
+          "id": 19,
           "options": {
             "cellHeight": "sm",
             "footer": {
@@ -1903,7 +1909,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 20
+            "y": 28
           },
           "id": 18,
           "options": {
@@ -1941,13 +1947,365 @@
           "title": "Netwatch",
           "transparent": true,
           "type": "state-timeline"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "color-text"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "string"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 34
+          },
+          "id": 14,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 3,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Device"
+              }
+            ]
+          },
+          "pluginVersion": "9.5.2",
+          "repeatDirection": "v",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "mikrotik_system_package{devicename=~\"$device\"}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Software packages",
+          "transformations": [
+            {
+              "id": "labelsToFields",
+              "options": {
+                "keepLabels": [
+                  "address",
+                  "comment",
+                  "disabled",
+                  "instance",
+                  "interface",
+                  "job",
+                  "name",
+                  "running",
+                  "type",
+                  "slave"
+                ],
+                "mode": "columns"
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "Value": {
+                    "aggregations": [],
+                    "operation": "aggregate"
+                  },
+                  "Value #Down": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #MTU": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Rate": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Rx": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Rx drop": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Rx error": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Rx pkt": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Tx": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Tx drop": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Tx error": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "Value #Tx pkt": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "activeaddress": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "activemacaddress": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "address": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ]
+                  },
+                  "build_time": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "comment": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "devicename": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "disabled": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "expiresafter": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "hostname": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "instance": {
+                    "aggregations": []
+                  },
+                  "interface": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "name": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "running": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "server": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "slave": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "status": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "type": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  },
+                  "version": {
+                    "aggregations": [
+                      "lastNotNull"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "disabled (lastNotNull)": false
+                },
+                "indexByName": {
+                  "build_time (lastNotNull)": 3,
+                  "devicename": 0,
+                  "disabled (lastNotNull)": 4,
+                  "name": 1,
+                  "version (lastNotNull)": 2
+                },
+                "renameByName": {
+                  "Value #Down (lastNotNull)": "#Down",
+                  "Value #MTU (lastNotNull)": "MTU",
+                  "Value #Rate (lastNotNull)": "Link",
+                  "Value #Rx (lastNotNull)": "Rx",
+                  "Value #Rx drop (lastNotNull)": "Rx drop",
+                  "Value #Rx error (lastNotNull)": "Rx err",
+                  "Value #Rx pkt (lastNotNull)": "Rx pkt",
+                  "Value #Tx (lastNotNull)": "Tx",
+                  "Value #Tx drop (lastNotNull)": "Tx drop",
+                  "Value #Tx error (lastNotNull)": "Tx err",
+                  "Value #Tx pkt (lastNotNull)": "Tx pkt",
+                  "activeaddress": "IP",
+                  "activemacaddress": "MAC",
+                  "address (lastNotNull)": "Address",
+                  "build_time (lastNotNull)": "Build time",
+                  "comment (lastNotNull)": "Comment",
+                  "devicename": "Device",
+                  "disabled (lastNotNull)": "Disabled",
+                  "expiresafter (lastNotNull)": "Expires",
+                  "hostname (lastNotNull)": "Hostname",
+                  "interface": "Interface",
+                  "name": "Package",
+                  "running (lastNotNull)": "Active",
+                  "server (lastNotNull)": "DHCP Server",
+                  "slave (lastNotNull)": "Slave",
+                  "status (lastNotNull)": "Status",
+                  "type (lastNotNull)": "Type",
+                  "version (lastNotNull)": "Version"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "Device"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "Package"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "MMM/DD/YYYY HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "Build time"
+                  }
+                ],
+                "fields": {}
+              }
+            }
+          ],
+          "transparent": true,
+          "type": "table"
         }
       ],
       "title": "Miscellaneous",
       "type": "row"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -2043,6 +2401,6 @@
   "timezone": "",
   "title": "Mikrotik Overview",
   "uid": "e2b35779-52b4-402d-a0e5-687d0ee7d6be",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
