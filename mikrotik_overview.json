@@ -675,8 +675,8 @@
             "type": "loki",
             "uid": "${DS_LOKI}"
           },
-          "editorMode": "builder",
-          "expr": "{instance=~\"$device\"} |= `` | level = `informational`",
+          "editorMode": "code",
+          "expr": "{instance=~\"$device\"} != `prometheus logged ` | level = `informational`",
           "queryType": "range",
           "refId": "A"
         }
@@ -774,8 +774,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text",
-                    "value": null
+                    "color": "text"
                   }
                 ]
               },
@@ -846,8 +845,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green",
-                          "value": null
+                          "color": "green"
                         },
                         {
                           "color": "yellow",
@@ -906,8 +904,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green",
-                          "value": null
+                          "color": "green"
                         },
                         {
                           "color": "yellow",
@@ -942,8 +939,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green",
-                          "value": null
+                          "color": "green"
                         },
                         {
                           "color": "yellow",
@@ -974,8 +970,7 @@
                       "mode": "absolute",
                       "steps": [
                         {
-                          "color": "green",
-                          "value": null
+                          "color": "green"
                         },
                         {
                           "color": "yellow",
@@ -1548,8 +1543,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text",
-                    "value": null
+                    "color": "text"
                   },
                   {
                     "color": "green",
@@ -1632,8 +1626,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text",
-                    "value": null
+                    "color": "text"
                   }
                 ]
               },
@@ -2000,8 +1993,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "red",
-                    "value": null
+                    "color": "red"
                   },
                   {
                     "color": "green",
@@ -2079,8 +2071,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "text",
-                    "value": null
+                    "color": "text"
                   }
                 ]
               },
@@ -2509,6 +2500,6 @@
   "timezone": "",
   "title": "Mikrotik Overview",
   "uid": "e2b35779-52b4-402d-a0e5-687d0ee7d6be",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
