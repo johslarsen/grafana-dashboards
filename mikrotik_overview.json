@@ -1510,6 +1510,113 @@
           "fieldConfig": {
             "defaults": {
               "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 50,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 10
+                  },
+                  {
+                    "color": "red",
+                    "value": 100
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 19
+          },
+          "id": 20,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.5.2",
+          "repeatDirection": "v",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "mikrotik_dhcp_leases_active_count{name=~\"$device\"}",
+              "hide": false,
+              "legendFormat": "{{name}} {{server}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Active leases",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
                 "mode": "thresholds"
               },
               "custom": {
@@ -1517,7 +1624,8 @@
                 "cellOptions": {
                   "type": "color-text"
                 },
-                "inspect": false
+                "inspect": false,
+                "minWidth": 80
               },
               "mappings": [],
               "thresholds": {
@@ -1559,10 +1667,10 @@
             ]
           },
           "gridPos": {
-            "h": 4,
-            "w": 24,
-            "x": 0,
-            "y": 27
+            "h": 6,
+            "w": 16,
+            "x": 8,
+            "y": 19
           },
           "id": 19,
           "options": {
