@@ -550,7 +550,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"}\n-node_memory_Shmem_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "expr": "node_memory_MemTotal_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_MemFree_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}-node_memory_Buffers_bytes{job=~\"$job\",instance=~\"$node\"}\n-node_memory_Shmem_bytes{job=~\"$job\",instance=~\"$node\"}\n-node_memory_KReclaimable_bytes{job=~\"$job\",instance=~\"$node\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "U",
@@ -589,7 +589,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"})",
+          "expr": "sum(node_memory_Cached_bytes{job=~\"$job\",instance=~\"$node\"}+\nnode_memory_KReclaimable_bytes{job=~\"$job\",instance=~\"$node\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "FS",
@@ -1844,7 +1844,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "color-text",
+            "cellOptions": {
+              "type": "color-text"
+            },
             "filterable": true,
             "inspect": false
           },
@@ -1896,7 +1898,9 @@
       },
       "id": 16,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -1907,7 +1911,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.3.6",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -1965,7 +1969,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "color-text",
+            "cellOptions": {
+              "type": "color-text"
+            },
             "filterable": true,
             "inspect": false
           },
@@ -1998,8 +2004,11 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "color-background-solid"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
               },
               {
                 "id": "thresholds",
@@ -2069,7 +2078,9 @@
       },
       "id": 20,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -2080,7 +2091,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.3.6",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -2376,7 +2387,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "color-text",
+            "cellOptions": {
+              "type": "color-text"
+            },
             "filterable": true,
             "inspect": false,
             "width": 100
@@ -2410,8 +2423,10 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               },
               {
                 "id": "custom.width"
@@ -2475,8 +2490,10 @@
                 "value": 65
               },
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               },
               {
                 "id": "unit",
@@ -2563,8 +2580,10 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               },
               {
                 "id": "unit",
@@ -2682,7 +2701,9 @@
       },
       "id": 2,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -2693,7 +2714,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.3.6",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -2947,8 +2968,8 @@
       "type": "table"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 37,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -3129,6 +3150,6 @@
   "timezone": "",
   "title": "Node Exporter Overview",
   "uid": "R0xd0MR7k",
-  "version": 22,
+  "version": 31,
   "weekStart": ""
 }
