@@ -898,7 +898,7 @@
                   {
                     "targetBlank": true,
                     "title": "Lookup",
-                    "url": "https://ipgeolocation.io/ip-location/${__value.text}"
+                    "url": "https://www.abuseipdb.com/check/${__value.text}"
                   }
                 ]
               }
@@ -1286,7 +1286,7 @@
                   {
                     "targetBlank": true,
                     "title": "Lookup",
-                    "url": "https://ipgeolocation.io/ip-location/${__value.text}"
+                    "url": "https://www.abuseipdb.com/check/${__value.text}"
                   }
                 ]
               }
