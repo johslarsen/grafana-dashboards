@@ -277,7 +277,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 7,
+        "w": 8,
         "x": 0,
         "y": 5
       },
@@ -438,6 +438,48 @@
         "uid": "${DS_LOKI}"
       },
       "description": "",
+      "gridPos": {
+        "h": 4,
+        "w": 16,
+        "x": 8,
+        "y": 5
+      },
+      "id": 27,
+      "interval": "$aggregation",
+      "options": {
+        "dedupStrategy": "exact",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
+          "editorMode": "code",
+          "expr": "{unit=~\"postfix.service\",instance=~\"$node\"} |= \"reject:\"",
+          "legendFormat": "{{user}}@{{instance}}:{{service}} <- {{ip}}",
+          "queryType": "range",
+          "refId": "logins"
+        }
+      ],
+      "title": "Rejected mails",
+      "transformations": [],
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${DS_LOKI}"
+      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -490,9 +532,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 17,
-        "x": 7,
-        "y": 5
+        "w": 8,
+        "x": 8,
+        "y": 9
       },
       "id": 25,
       "interval": "$aggregation",
@@ -589,8 +631,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 17,
-        "x": 7,
+        "w": 8,
+        "x": 16,
         "y": 9
       },
       "id": 24,
@@ -684,7 +726,68 @@
           },
           "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reject"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sent"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "deferred"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "bounced"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 5,
